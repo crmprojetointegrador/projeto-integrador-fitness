@@ -1,10 +1,13 @@
 package com.generation.fitness.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,7 +22,11 @@ public class Produto {
     @NotBlank(message = "O nome do produto é obrigatório!")
     @Size(min = 2, max = 100, message = "O nome do produto deve ter entre 2 e 100 caracteres")
     private String nome;
-
+    
+    @NotNull(message = "A data de validade é obrigatória!")
+    @FutureOrPresent(message = "A data de validade deve ser igual ou posterior à data atual!")
+    private LocalDate dataValidade;
+    
     @NotNull(message = "O preço é obrigatório!")
     @PositiveOrZero(message = "O preço deve ser igual ou maior que zero!")
     private Double preco;
@@ -83,6 +90,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public LocalDate getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(LocalDate dataValidade) {
+		this.dataValidade = dataValidade;
 	}
     
 
