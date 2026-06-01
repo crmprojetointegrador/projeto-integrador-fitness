@@ -103,6 +103,14 @@ public class Produto {
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
     
 
 }
