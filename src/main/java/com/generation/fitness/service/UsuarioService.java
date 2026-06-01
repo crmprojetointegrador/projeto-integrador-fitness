@@ -2,7 +2,6 @@ package com.generation.fitness.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
 
 @Service
 public class UsuarioService {
@@ -22,14 +21,19 @@ public class UsuarioService {
         String classificacao;
         if (imcValor < 18.5) {
             classificacao = "Abaixo do peso";
+            
         } else if (imcValor >= 18.5 && imcValor < 25.0) {
             classificacao = "Peso normal";
+            
         } else if (imcValor >= 25.0 && imcValor < 30.0) {
             classificacao = "Sobrepeso";
+            
         } else if (imcValor >= 30.0 && imcValor < 35.0) {
             classificacao = "Obesidade Grau I";
+            
         } else if (imcValor >= 35.0 && imcValor < 40.0) {
             classificacao = "Obesidade Grau II";
+            
         } else {
             classificacao = "Obesidade Grau III (Mórbida)";
         }
