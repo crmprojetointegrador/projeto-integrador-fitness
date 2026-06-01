@@ -42,6 +42,10 @@ public class Produto {
     @ManyToOne
     @JsonIgnoreProperties("produto")
     private Categoria categoria;
+    
+    @ManyToOne
+    @JsonIgnoreProperties("produto")
+    private Usuario usuario;
 
 
 	public Long getId() {
@@ -98,6 +102,14 @@ public class Produto {
 
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
     
 
