@@ -67,9 +67,9 @@ Antes de rodar a aplicação localmente, certifique-se de que possui:
 
 ## 🤝 Equipe de Desenvolvimento
 
-- **Alanis Santos** - [GitHub](https://github.com/alanis-santos)
-- **Bruna Mendes** - [GitHub](https://github.com/bruna-dsmendes)
-- **Eliane Orlandin** - [GitHub](https://github.com/Eliane-orlandin)
-- **Flame Souza** - [GitHub](https://github.com/PraFlame)
-- **Patricia Rocha** - [GitHub](https://github.com/patriciarocha1805)
+- **Alanis Santos** - [GitHub](https://github.com/alanis-santos)   [Linkedin](https://www.linkedin.com/in/devalanissantos/)
+- **Bruna Mendes** - [GitHub](https://github.com/bruna-dsmendes)   [Linkedin](https://www.linkedin.com/in/devbrunamendes/)
+- **Eliane Orlandin** - [GitHub](https://github.com/Eliane-orlandin)   [Linkedin](https://www.linkedin.com/in/elianeorlandindocarmo/)
+- **Flame Souza** - [GitHub](https://github.com/PraFlame)   [Linkedin](https://www.linkedin.com/in/souflame/)
+- **Patricia Rocha** - [GitHub](https://github.com/patriciarocha1805)   [Linkedin](https://www.linkedin.com/in/patriciarochadev/)
 
