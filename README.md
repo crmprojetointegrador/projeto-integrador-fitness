@@ -46,5 +46,31 @@ Antes de rodar a aplicação localmente, certifique-se de que possui:
 ---
 
 ## 🚀 Como Rodar a Aplicação Localmente
-   **Clonar este Repositório:**
+   1. **Clonar este Repositório:**
+   ```bash
    git clone https://github.com/crmprojetointegrador/projeto-integrador-fitness.git
+   ```
+
+2. **Configurar o Banco de Dados:**
+   - No MySQL Workbench, crie uma base de dados com o nome que preferir (ex: `db_fitness_app`).
+   - Configure as credenciais de acesso no arquivo `application.properties` localizado em `src/main/resources/`.
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness_app?useSSL=false&serverTimezone=UTC
+   spring.datasource.username=root
+   spring.datasource.password=sua_senha
+   ```
+
+3. **Executar a Aplicação:**
+   - Importe o projeto na sua IDE como um **Projeto Maven Existente**.
+   - Localize a classe principal `FitnessApplication.java` (ou similar) e execute-a como **Spring Boot App**.
+```
+
+## 🤝 Equipe de Desenvolvimento
+
+- **Alanis Santos** - [GitHub](https://github.com/alanis-santos)
+- **Bruna Mendes** - [GitHub](https://github.com/bruna-dsmendes)
+- **Eliane Orlandin** - [GitHub](https://github.com/Eliane-orlandin)
+- **Flame Souza** - [GitHub](https://github.com/PraFlame)
+- **Patricia Rocha** - [GitHub](https://github.com/patriciarocha1805)
+
