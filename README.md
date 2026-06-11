@@ -64,7 +64,6 @@ Antes de rodar a aplicação localmente, certifique-se de que possui:
 3. **Executar a Aplicação:**
    - Importe o projeto na sua IDE como um **Projeto Maven Existente**.
    - Localize a classe principal `FitnessApplication.java` (ou similar) e execute-a como **Spring Boot App**.
-```
 
 ## 🤝 Equipe de Desenvolvimento
 
