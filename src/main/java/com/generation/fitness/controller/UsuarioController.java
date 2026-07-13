@@ -76,7 +76,7 @@ public class UsuarioController {
 		
 	// Login Simulado
 	@PostMapping("/logar")
-	public ResponseEntity<Usuario> autenticar(@Valid @RequestBody Usuario usuarioLogin) {
+	public ResponseEntity<Usuario> autenticar(@RequestBody Usuario usuarioLogin) {
 		return usuarioRepository.findByUsuario(usuarioLogin.getUsuario())
 				.filter(usuarioBanco -> usuarioBanco.getSenha().equals(usuarioLogin.getSenha()))
 				.map(resposta -> ResponseEntity.ok(resposta))
