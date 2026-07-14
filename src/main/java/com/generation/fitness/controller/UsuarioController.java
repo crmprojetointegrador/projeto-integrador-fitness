@@ -22,12 +22,13 @@ import com.generation.fitness.model.Usuario;
 import com.generation.fitness.repository.UsuarioRepository;
 import com.generation.fitness.service.Imc;
 import com.generation.fitness.service.UsuarioService;
+import org.springframework.web.bind.annotation.RequestMethod;	
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class UsuarioController {
 
 	@Autowired
