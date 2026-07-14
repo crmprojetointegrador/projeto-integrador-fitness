@@ -23,7 +23,6 @@ public class Produto {
     @Size(min = 2, max = 100, message = "O nome do produto deve ter entre 2 e 100 caracteres")
     private String nome;
     
-    @NotNull(message = "A data de validade é obrigatória!")
     @FutureOrPresent(message = "A data de validade deve ser igual ou posterior à data atual!")
     private LocalDate dataValidade;
     
@@ -31,7 +30,6 @@ public class Produto {
     @PositiveOrZero(message = "O preço deve ser igual ou maior que zero!")
     private Double preco;
 
-    @NotNull(message = "A quantidade de calorias é obrigatória!")
     @PositiveOrZero(message = "As calorias não podem ser negativas!")
     private Integer calorias; 
 
