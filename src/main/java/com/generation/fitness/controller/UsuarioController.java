@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.fitness.model.Usuario;
 import com.generation.fitness.repository.UsuarioRepository;
@@ -34,6 +36,10 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
 	// Listar todos os usuários
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -57,30 +63,44 @@ public class UsuarioController {
 		Imc resultado = usuarioService.calcularIMC(peso, altura);
 		return ResponseEntity.ok(resultado);
 	}
-	
+
 	// Cadastrar Usuário
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Usuario> post(@Valid @RequestBody Usuario usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioRepository.save(usuario));
+
+	    if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent()) {
+	        throw new ResponseStatusException(HttpStatus.CONFLICT, "Este e-mail já está cadastrado!");
+	    }
+
+	    usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+
+	    return ResponseEntity.status(HttpStatus.CREATED)
+	            .body(usuarioRepository.save(usuario));
 	}
-	
+
 	// Atualizar Usuário
 	@PutMapping("/atualizar")
-	public ResponseEntity<Usuario> put(@Valid @RequestBody Usuario usuario) {
-		return usuarioRepository.findById(usuario.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK)
-						.body(usuarioRepository.save(usuario)))
-				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
+	    return usuarioRepository.findById(usuario.getId())
+	            .map(usuarioExistente -> {
+	                if (usuario.getSenha() == null || usuario.getSenha().isBlank()) {
+	                    usuario.setSenha(usuarioExistente.getSenha()); // mantém a senha atual
+	                } else {
+	                    usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); // nova senha
+	                }
+	                return ResponseEntity.status(HttpStatus.OK)
+	                        .body(usuarioRepository.save(usuario));
+	            })
+	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-		
-	// Login Simulado
+
+	// Login
 	@PostMapping("/logar")
-	public ResponseEntity<Usuario> autenticar(@Valid @RequestBody Usuario usuarioLogin) {
-		return usuarioRepository.findByUsuario(usuarioLogin.getUsuario())
-				.filter(usuarioBanco -> usuarioBanco.getSenha().equals(usuarioLogin.getSenha()))
-				.map(resposta -> ResponseEntity.ok(resposta))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	public ResponseEntity<Usuario> autenticar(@RequestBody Usuario usuarioLogin) {
+	    return usuarioRepository.findByUsuario(usuarioLogin.getUsuario())
+	            .filter(usuarioBanco -> passwordEncoder.matches(usuarioLogin.getSenha(), usuarioBanco.getSenha()))
+	            .map(resposta -> ResponseEntity.ok(resposta))
+	            .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
 	// Deletar Usuário
