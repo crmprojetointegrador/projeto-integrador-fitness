@@ -33,7 +33,6 @@ public class Produto {
     @PositiveOrZero(message = "As calorias não podem ser negativas!")
     private Integer calorias; 
 
-    @NotBlank(message = "A marca é obrigatória!")
     private String marca;
 
     @NotNull(message = "O produto deve estar associado a uma categoria!")
