@@ -1,6 +1,8 @@
 package com.generation.fitness.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +23,7 @@ public class Usuario {
 	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
 	
-	@Schema
+	@Column(unique = true)
 	@NotBlank(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String usuario;
@@ -31,6 +33,7 @@ public class Usuario {
 	
 	@NotBlank(message = "O Atributo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String senha;
 
 	public Long getId() {
